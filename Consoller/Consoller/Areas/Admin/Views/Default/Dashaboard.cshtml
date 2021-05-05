@@ -5,7 +5,8 @@
     ViewBag.Title = "Dashaboard";
     Layout = "~/Areas/Admin/Views/Shared/Layout.cshtml";
     var increment = 0;
-
+    var increment1 = 0;
+    dbcontext db = new dbcontext();
 }
 
 
@@ -201,15 +202,20 @@
         </div>
         <!-- end row -->
 
+        
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
         <div class="card">
             <div class="card-body" style="position: relative;">
-                <h4 class="card-title mb-4 float-sm-left">Daily Inquiry</h4>
+                <h4 class="card-title mb-4 float-sm-left">Top 5 Immigation Inquiry</h4>
                 <div class="table-responsive">
                     <table class="table table-centered table-nowrap mb-0">
                         <thead class="thead-light">
                             <tr>
 
-                                <th>Order ID</th>
+                                <th>S.no</th>
                                 <th>Date</th>
                                 <th>Name</th>
                                 <th>City</th>
@@ -254,8 +260,60 @@
                 </div>
                 <div class="clearfix"></div>
 
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body" style="position: relative;">
+                <h4 class="card-title mb-4 float-sm-left">Top 5 Ielts Inquiry</h4>
+                <div class="table-responsive">
+                    <table class="table table-centered table-nowrap mb-0">
+                        <thead class="thead-light">
+                            <tr>
 
-                <div class="resize-triggers"><div class="expand-trigger"><div style="width: 694px; height: 442px;"></div></div><div class="contract-trigger"></div></div>
+                                <th>S.no</th>
+                                <th>Date</th>
+                                <th>Name</th>
+                                <th>Contact</th>
+                                <th>Enqyiry For</th>
+                                <th>View Details</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.Ielts)
+                            {
+                                <tr>
+                                    <td>
+                                        @{ increment1 = increment1 + 1;}
+                                        @increment1
+                                    </td>
+                                    <td>@Convert.ToDateTime(item.date).ToString("dd/MM/yyyy")</td>
+                                    <td>@item.name</td>
+                                    <td>
+                                        @item.contact
+                                    </td>
+                                    <td>
+                                        @{ 
+                                            Category cc = db.Categories.FirstOrDefault(x => x.Categoryid == item.Categoryid);
+                                        }
+                                        @cc.Name
+                                    </td>
+
+
+                                    <td>
+                                        B
+                                    </td>
+                                </tr>
+                            }
+
+
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="clearfix"></div>
+
             </div>
         </div>
     </div>

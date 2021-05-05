@@ -69,7 +69,16 @@ namespace Consoller.Areas.Admin.Models
             get
             {
                 DateTime date =Convert.ToDateTime(System.DateTime.Now.ToShortDateString());
-                List<online> online = db.onlines.Where(x => x.Date == date).ToList();
+                List<online> online = db.onlines.OrderByDescending(x=>x.Oid).Take(5).ToList();
+                return online;
+            }
+        }
+        public List<tblinquiry> Ielts
+        {
+            get
+            {
+                DateTime date = Convert.ToDateTime(System.DateTime.Now.ToShortDateString());
+                List<tblinquiry> online = db.tblinquiries.OrderByDescending(x => x.Id).Take(5).ToList();
                 return online;
             }
         }

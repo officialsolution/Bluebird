@@ -6,14 +6,16 @@
     Helper help = new Helper();
     dbcontext db = new dbcontext();
     string user = User.Identity.Name;
+
     var name = (User.Identity.IsAuthenticated ? HttpContext.Current.User.Identity.Name : "Guest");
     if (name == "Guest")
     {
         Response.Redirect(Url.Action("Login", "Credential"));
 
     }
+    
     tblreceptionist rec = db.tblreceptionists.FirstOrDefault(x => x.rid == user);
-    IEnumerable<Notification> noti = db.Notifications.Where(x => x.Consoller == name && x.Status == true).ToList();
+    IEnumerable<Notification> noti = db.Notifications.Where(x => x.Consoller == rec.name && x.Status == true).ToList();
 }
 
 <!DOCTYPE html>
